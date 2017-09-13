@@ -1,0 +1,16 @@
+{{#pageObjectData.commonDependencies}}
+import '{{{.}}}';
+{{/pageObjectData.commonDependencies}}
+
+class {{poClassName}} {
+{{#pageObjectData.variables}}
+
+  {{{internalString}}}
+
+{{/pageObjectData.variables}}
+{{#pageObjectData.variables}}
+
+  {{{getterString}}}
+
+{{/pageObjectData.variables}}
+}

@@ -1,0 +1,16 @@
+name: angular_cli
+version: 0.1.0
+description: Scaffolding tool for AngularDart
+environment:
+  sdk: '>=1.24.0 <2.0.0'
+executables:
+  ngdart:
+dependencies:
+  ansicolor: ^0.0.9
+  args: ^0.13.7
+  mustache: ^0.2.5
+  logging: ^0.11.3
+  path: ^1.4.2
+  resource: ^2.1.2
+dev_dependencies:
+  test: ^0.12.21

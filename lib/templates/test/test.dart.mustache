@@ -1,0 +1,43 @@
+@Tags(const ['{{tag}}'])
+@TestOn('browser')
+
+import 'package:angular/angular.dart';
+import 'package:angular_test/angular_test.dart';
+import 'package:test/test.dart';
+
+import '{{{projectModel.componentClassUri}}}';
+{{#projectModel.referencedUris}}
+import '{{{.}}}';
+{{/projectModel.referencedUris}}
+
+import '{{{poGenerator.poFileName}}}';
+
+@AngularEntrypoint()
+void main() {
+  final testBed = new NgTestBed<{{projectModel.componentClassName}}>();
+{{#projectModel.needProviders}}
+  testBed.addProviders([
+    // Please add provider for following classes.
+    // For example, if Window is used in your component and you want to
+    // mock it in test:
+    //   const Provider(Window, useClass: MockWindow)
+    {{#projectModel.serviceClasses}}
+    {{.}},
+    {{/projectModel.serviceClasses}}
+  ]);
+{{/projectModel.needProviders}}
+  NgTestFixture<{{projectModel.componentClassName}}> fixture;
+  {{poGenerator.poClassName}} pageObject;
+
+  setUp(() async {
+    fixture = await testBed.create();
+    pageObject = await fixture.resolvePageObject({{poGenerator.poClassName}});
+  });
+
+  tearDown(disposeAnyRunningTest);
+
+  test('Default greeting', () async {
+    // Change it: Check content of the page using pageObject.
+    expect(pageObject, isNotNull);
+  });
+}
