@@ -1,8 +1,8 @@
 ## AngularDart CLI
 
 A command line interface for [AngularDart][webdev_angular].
-It can help you to generate the skeleton of an AngularDart project,
-generate component, and generate test using [page object][page_object].
+It can scaffold a skeleton AngularDart project, component, and test with
+[page object][page_object].
 
 ## Installation
 
@@ -12,7 +12,7 @@ To install:
 pub global activate angular_cli
 ```
 
-To update, run activate again:
+To update:
 
 ```bash
 pub global activate angular_cli
@@ -24,14 +24,14 @@ pub global activate angular_cli
 ngdart help
 ```
 
-You can get help for specific command by running `ngdart help [command name]`.
-For example
+For help on specific command, run `ngdart help [command name]`
+For example:
 
 ```bash
 ngdart help generate test
 ```
 
-will show you how to use command `generate test`.
+will show how to use command `generate test`.
 
 ### Generating AngularDart project
 
@@ -45,13 +45,13 @@ pub serve
 Navigate to `http://localhost:8080` to visit the project you just built.
 Command following will assume that you are in the root directory of
 the project.
- 
+
 ### Generating component
 
 ```bash
 ngdart generate component AnotherComponent
 ```
-This command will generate component under folder `lib/`. 
+This command will generate component under folder `lib/`.
 You can use option `-p` to change the folder.
 
 
@@ -61,7 +61,7 @@ You can use option `-p` to change the folder.
 ngdart generate test lib/app_component.dart
 ```
 
-Command above will generate 2 files. One is page object file 
+Command above will generate 2 files. One is page object file
 and the other one is test file.
 Test generated is using [angular_test][pub_angular_test]
 and [`test` package][pub_test]
