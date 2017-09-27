@@ -1,5 +1,9 @@
 name: angular_cli
 version: 0.1.0
+authors:
+- Tianfei Zhu <tianfei@google.com>
+- Jing Bian <jingbian@google.com>
+- Jonah Williams <jonahwilliams@google.com>
 homepage: https://github.com/google/angular_cli
 description: Scaffolding tool for AngularDart
 environment:
