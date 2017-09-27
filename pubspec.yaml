@@ -1,5 +1,5 @@
 name: angular_cli
-version: 0.1.0
+version: 0.1.0+1
 authors:
 - Tianfei Zhu <tianfei@google.com>
 - Jing Bian <jingbian@google.com>
@@ -11,8 +11,10 @@ environment:
 executables:
   ngdart:
 dependencies:
+  analyzer: ^0.30.0
   ansicolor: ^0.0.9
   args: ^0.13.7
+  html: ^0.13.2
   mustache: ^0.2.5
   logging: ^0.11.3
   path: ^1.4.2

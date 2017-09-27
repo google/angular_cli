@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.0+1
+- Added missing dependencies.
+
 ## 0.1.0
 
 - New implementation, support to create project, generate AngularDart component and test. 
