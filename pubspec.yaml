@@ -1,5 +1,6 @@
 name: angular_cli
 version: 0.1.0
+homepage: https://github.com/google/angular_cli
 description: Scaffolding tool for AngularDart
 environment:
   sdk: '>=1.24.0 <2.0.0'
