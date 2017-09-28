@@ -1,5 +1,7 @@
 ## AngularDart CLI
 
+[![Build Status](https://travis-ci.org/google/angular_cli.svg?branch=master)](https://travis-ci.org/google/angular_cli)
+
 A command line interface for [AngularDart][webdev_angular].
 It can scaffold a skeleton AngularDart project, component, and test with
 [page object][page_object].
