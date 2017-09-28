@@ -22,10 +22,14 @@ class TemplateFile {
 
   /// Renders template file on [_path] with values from [_data].
   Future<String> renderString() async {
-    var resource = new Resource('package:angular_cli/templates/$_path');
+    var uri = _toUri('package:angular_cli/templates/$_path');
+    var resource = new Resource(uri);
     var content = await resource.readAsString(encoding: UTF8);
 
     var template = new Template(content);
     return template.renderString(_data);
   }
+
+  // Convert (windows) path into resource URI.
+  String _toUri(String path) => path.replaceAll('\\', '/');
 }
