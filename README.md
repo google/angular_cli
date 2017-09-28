@@ -1,5 +1,6 @@
 ## AngularDart CLI
 
+[![Pub Package](https://img.shields.io/pub/v/angular_cli.svg)](https://pub.dartlang.org/packages/angular_cli)
 [![Build Status](https://travis-ci.org/google/angular_cli.svg?branch=master)](https://travis-ci.org/google/angular_cli)
 
 A command line interface for [AngularDart][webdev_angular].
