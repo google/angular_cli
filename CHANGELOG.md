@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.0+3
+- Exported visitors which can be used to extract info from Dart files.
+
 ## 0.1.0+2
 - Fixed an issue on README.md formatting.
 - Enabled travis.
