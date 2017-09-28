@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0+2
+- Fixed an issue on README.md formatting.
+- Enabled travis.
+
 ## 0.1.0+1
 - Added missing dependencies.
 

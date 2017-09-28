@@ -64,7 +64,7 @@ ngdart generate test lib/app_component.dart
 Command above will generate 2 files. One is page object file
 and the other one is test file.
 Test generated is using [angular_test][pub_angular_test]
-and [`test` package][pub_test]
+and [test][pub_test] package.
 
 Use command
 
