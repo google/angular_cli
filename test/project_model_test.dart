@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'package:angular_cli/src/file_reader.dart';
 import 'package:angular_cli/src/project_model.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 void main() {
@@ -15,8 +16,8 @@ void main() {
     FileReader.reader = new FileReaderMock();
     ProjectModel projectModel;
     setUp(() {
-      projectModel =
-          new ProjectModel('.packages', 'pubspec.yaml', 'lib/a.dart', null);
+      projectModel = new ProjectModel(
+          '.packages', 'pubspec.yaml', path.join('lib', 'a.dart'), null);
     });
 
     test('shoud export project name', () {
@@ -57,7 +58,7 @@ void main() {
 
 var _files = [
   {
-    'path': 'a/lib/a.dart',
+    'path': path.join('a', 'lib', 'a.dart'),
     'content': '''
       library test_a;
 
@@ -83,7 +84,7 @@ var _files = [
     '''
   },
   {
-    'path': 'a/lib/src/d.dart',
+    'path': path.join('a', 'lib', 'src', 'd.dart'),
     'content': '''
       part of test_a;
 
@@ -91,7 +92,7 @@ var _files = [
     '''
   },
   {
-    'path': 'a/lib/a1.dart',
+    'path': path.join('a', 'lib', 'a1.dart'),
     'content': '''
       import 'package:angular/angular.dart';
 
@@ -107,21 +108,19 @@ var _pubSpec = ['name: a'];
 
 class FileReaderMock implements FileReader {
   @override
-  List<String> readAsLines(Object uri, {Encoding encoding: UTF8}) {
-    if (uri is! String) return null;
-    if (uri == '.packages') {
+  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) {
+    if (filePath == '.packages') {
       return _dotPackages;
-    } else if (uri == 'pubspec.yaml') {
+    } else if (filePath == 'pubspec.yaml') {
       return _pubSpec;
     }
     return null;
   }
 
   @override
-  String readAsString(Object uri, {Encoding encoding: UTF8}) {
-    if (uri is! Uri) return null;
+  String readAsString(String filePath, {Encoding encoding: UTF8}) {
     for (var file in _files) {
-      if (file['path'] == uri.toString()) return file['content'];
+      if (file['path'] == filePath) return file['content'];
     }
     return null;
   }

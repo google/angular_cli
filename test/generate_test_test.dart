@@ -10,6 +10,7 @@ import 'package:angular_cli/src/app_logger.dart';
 import 'package:angular_cli/src/command_runner.dart';
 import 'package:angular_cli/src/file_reader.dart';
 import 'package:angular_cli/src/file_writer.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 void main() {
@@ -26,7 +27,8 @@ void main() {
     });
 
     test('should generate test with default path', () async {
-      await runner.run(['generate', 'test', 'lib/app_component.dart']);
+      await runner
+          .run(['generate', 'test', path.join('lib', 'app_component.dart')]);
 
       expect(writer.filesWritten.length, 2);
       expect(writer.filesWritten[0].startsWith('test'), isTrue);
@@ -74,7 +76,7 @@ class FileWriterMock implements FileWriter {
 
 var _files = [
   {
-    'path': 'hello_angular/lib/app_component.dart',
+    'path': path.join('hello_angular', 'lib', 'app_component.dart'),
     'content': '''
       import 'package:angular/angular.dart';
 
@@ -87,7 +89,7 @@ var _files = [
     '''
   },
   {
-    'path': 'lib/app_component.html',
+    'path': path.join('lib', 'app_component.html'),
     'content': '''
       <h1>Hello Angular</h1>
     '''
@@ -99,21 +101,19 @@ var _pubSpec = ['name: hello_angular'];
 
 class FileReaderMock implements FileReader {
   @override
-  List<String> readAsLines(Object uri, {Encoding encoding: UTF8}) {
-    if (uri is! String) return null;
-    if (uri == '.packages') {
+  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) {
+    if (filePath == '.packages') {
       return _dotPackages;
-    } else if (uri == 'pubspec.yaml') {
+    } else if (filePath == 'pubspec.yaml') {
       return _pubSpec;
     }
     return null;
   }
 
   @override
-  String readAsString(Object uri, {Encoding encoding: UTF8}) {
-    var path = uri is String ? uri : uri.toString();
+  String readAsString(String filePath, {Encoding encoding: UTF8}) {
     for (var file in _files) {
-      if (file['path'] == path) return file['content'];
+      if (file['path'] == filePath) return file['content'];
     }
     return null;
   }

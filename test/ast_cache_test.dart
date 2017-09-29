@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:angular_cli/src/file_reader.dart';
 import 'package:angular_cli/src/package_uri_resolver.dart';
 import 'package:angular_cli/src/visitors/ast_cache.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 void main() {
@@ -42,7 +43,7 @@ var _files = [
   {
     'uri': 'package:a/a.dart',
     'public_uri': 'package:a/a.dart',
-    'path': 'a/lib/a.dart',
+    'path': path.join('a', 'lib', 'a.dart'),
     'content': '''
       import 'package:b/b.dart';
       import 'a1.dart';
@@ -52,7 +53,7 @@ var _files = [
   {
     'uri': 'package:b/b.dart',
     'public_uri': 'package:b/b.dart',
-    'path': 'b/lib/b.dart',
+    'path': path.join('b', 'lib', 'b.dart'),
     'content': '''
       import 'package:angular/angular.dart';
     '''
@@ -60,7 +61,7 @@ var _files = [
   {
     'uri': 'package:a/a1.dart',
     'public_uri': 'package:a/a1.dart',
-    'path': 'a/lib/a1.dart',
+    'path': path.join('a', 'lib', 'a1.dart'),
     'content': '''
       import 'dart:io';
     '''
@@ -68,7 +69,7 @@ var _files = [
   {
     'uri': 'package:a/src/a2.dart',
     'public_uri': 'package:a/a.dart',
-    'path': 'a/lib/src/a2.dart',
+    'path': path.join('a', 'lib', 'src', 'a2.dart'),
     'content': '''
       import 'a3.dart';
       export 'a4.dart';
@@ -77,7 +78,7 @@ var _files = [
   {
     'uri': 'package:a/src/a3.dart',
     'public_uri': 'package:a/src/a3.dart',
-    'path': 'a/lib/src/a3.dart',
+    'path': path.join('a', 'lib', 'src', 'a3.dart'),
     'content': '''
       import 'package:angular/angular.dart';
     '''
@@ -85,7 +86,7 @@ var _files = [
   {
     'uri': 'package:a/src/a4.dart',
     'public_uri': 'package:a/a.dart',
-    'path': 'a/lib/src/a4.dart',
+    'path': path.join('a', 'lib', 'src', 'a4.dart'),
     'content': '''
       import 'package:angular/angular.dart';
     '''
@@ -96,16 +97,15 @@ var _dotPackages = ['a:a/lib/', 'b:b/lib/'];
 
 class FileReaderMock implements FileReader {
   @override
-  List<String> readAsLines(Object uri, {Encoding encoding: UTF8}) {
-    if (uri is String && uri == '.packages') return _dotPackages;
+  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) {
+    if (filePath == '.packages') return _dotPackages;
     return null;
   }
 
   @override
-  String readAsString(Object uri, {Encoding encoding: UTF8}) {
-    if (uri is! Uri) return null;
+  String readAsString(String filePath, {Encoding encoding: UTF8}) {
     for (var file in _files) {
-      if (file['path'] == uri.toString()) return file['content'];
+      if (file['path'] == filePath) return file['content'];
     }
     return null;
   }

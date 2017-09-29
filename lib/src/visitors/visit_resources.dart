@@ -8,8 +8,8 @@ import 'package:analyzer/analyzer.dart';
 import 'package:path/path.dart' as path;
 
 import '../app_logger.dart';
+import '../path_util.dart';
 import 'ast_cache.dart';
-import 'utils.dart';
 
 /// Used to make analyzing Dart files easier by treating libraries and
 /// parts as one unit.

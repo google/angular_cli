@@ -40,10 +40,3 @@ String extractConstructorName(InstanceCreationExpression instanceCreationExp) {
   }
   return constructorName;
 }
-
-/// Extracts package name from package [uri].
-String getPackageName(String uri) =>
-    uri.substring(0, uri.indexOf('/')).replaceAll('package:', '');
-
-/// Extracts path from package [uri].
-String getPath(String uri) => uri.substring(uri.indexOf('/') + 1);

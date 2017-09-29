@@ -7,6 +7,7 @@
 import 'dart:async';
 
 import '../generators/project.dart';
+import '../path_util.dart';
 import 'command.dart';
 
 /// Handles the `new` ngdart command.
@@ -20,8 +21,7 @@ class NewProjectCommand extends NgDartCommand {
       '[--path <project/path>] [--root_component <RootComponentName>]';
 
   String get _rootComponent => argResults[_rootComponentOption];
-  String get _projectPath =>
-      NgDartCommand.getNormalizedPath(argResults[_pathOption]);
+  String get _projectPath => getNormalizedPath(argResults[_pathOption]);
 
   NewProjectCommand() {
     argParser.addOption(_pathOption,

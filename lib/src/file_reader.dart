@@ -12,23 +12,9 @@ class FileReader {
 
   FileReader._();
 
-  String readAsString(uri, {Encoding encoding: UTF8}) {
-    if (uri is String) {
-      return new File(uri).readAsStringSync(encoding: encoding);
-    } else if (uri is Uri) {
-      return new File.fromUri(uri).readAsStringSync(encoding: encoding);
-    }
+  String readAsString(String filePath, {Encoding encoding: UTF8}) =>
+      new File(filePath).readAsStringSync(encoding: encoding);
 
-    return null;
-  }
-
-  List<String> readAsLines(uri, {Encoding encoding: UTF8}) {
-    if (uri is String) {
-      return new File(uri).readAsLinesSync(encoding: encoding);
-    } else if (uri is Uri) {
-      return new File.fromUri(uri).readAsLinesSync(encoding: encoding);
-    }
-
-    return null;
-  }
+  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) =>
+      new File(filePath).readAsLinesSync(encoding: encoding);
 }

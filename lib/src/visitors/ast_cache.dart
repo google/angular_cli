@@ -13,7 +13,7 @@ import '../app_logger.dart';
 import '../exceptions.dart';
 import '../file_reader.dart';
 import '../package_uri_resolver.dart';
-import 'utils.dart';
+import '../path_util.dart';
 
 /// Caches the output of the Dart analyzer to avoid re-analyzing dart resources.
 class AstCache {
@@ -67,12 +67,12 @@ class AstCache {
     if (_uriToAst[uri] != null) return;
     CompilationUnit compilationUnit;
     try {
-      var fileUri = _uriResolver.resolve(uri);
-      AppLogger.log.fine('Parsing file $fileUri...');
+      var filePath = _uriResolver.resolve(uri);
+      AppLogger.log.fine('Parsing file $filePath...');
 
       compilationUnit = parseCompilationUnit(
-          FileReader.reader.readAsString(fileUri),
-          name: uri.toString());
+          FileReader.reader.readAsString(filePath),
+          name: filePath);
     } on UsageException {
       rethrow;
     } catch (e) {

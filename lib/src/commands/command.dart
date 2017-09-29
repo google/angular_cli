@@ -6,7 +6,6 @@
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
-import 'package:path/path.dart' as path;
 
 import '../entity_name.dart';
 
@@ -50,11 +49,4 @@ abstract class NgDartCommand extends Command {
 
     return entityName;
   }
-
-  /// Fixes invalid path.
-  ///
-  /// For example:
-  ///   'path\to/folder' -> 'path/to/folder' (posix)
-  static String getNormalizedPath(String oldPath) =>
-      path.normalize(path.joinAll(oldPath.split(new RegExp(r'[\\/]')))).trim();
 }

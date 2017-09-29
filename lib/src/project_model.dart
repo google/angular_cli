@@ -4,9 +4,12 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
+import 'package:path/path.dart' as path;
+
 import 'exceptions.dart';
 import 'file_reader.dart';
 import 'package_uri_resolver.dart';
+import 'path_util.dart';
 import 'visitors/angular_component_visitor.dart';
 import 'visitors/ast_cache.dart';
 import 'visitors/binding_info.dart';
@@ -56,9 +59,11 @@ class ProjectModel {
   factory ProjectModel(String dotPackagesFilePath, String pubspecFilePath,
       String componentPath, String className) {
     var projectName = _getProjectName(pubspecFilePath);
-    var componentClassUri = componentPath.startsWith('lib/')
-        ? 'package:$projectName/${componentPath.substring('lib/'.length)}'
-        : 'package:$projectName/$componentPath';
+    var libPrefix = 'lib${path.separator}';
+    var componentClassUri = componentPath.startsWith(libPrefix)
+        ? fixUri(
+            'package:$projectName/${componentPath.substring(libPrefix.length)}')
+        : fixUri('package:$projectName/$componentPath');
 
     var uriResolver = new PackageUriResolver(dotPackagesFilePath);
     var asts = new AstCache(componentClassUri, uriResolver);

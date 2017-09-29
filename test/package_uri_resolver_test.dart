@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:angular_cli/src/exceptions.dart';
 import 'package:angular_cli/src/file_reader.dart';
 import 'package:angular_cli/src/package_uri_resolver.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 void main() {
@@ -22,16 +23,25 @@ void main() {
     });
 
     test('should parse dependent package URI', () {
-      var uri = resolver.resolve('package:some_package/some_file.dart');
+      var filePath = resolver.resolve('package:some_package/some_file.dart');
       expect(
-          uri.toString(),
-          equals('file:///home/someone/.pub-cache/hosted/'
-              'pub.dartlang.org/some_package-1.0.0/lib/some_file.dart'));
+          filePath,
+          equals(path.join(
+              path.separator,
+              path.join(
+                  'home',
+                  'someone',
+                  '.pub-cache',
+                  'hosted',
+                  'pub.dartlang.org',
+                  'some_package-1.0.0',
+                  'lib',
+                  'some_file.dart'))));
     });
 
     test('should parse current project URI', () {
-      var uri = resolver.resolve('package:angular_cli/some_file.dart');
-      expect(uri.toString(), equals('lib/some_file.dart'));
+      var filePath = resolver.resolve('package:angular_cli/some_file.dart');
+      expect(filePath, equals(path.join('lib', 'some_file.dart')));
     });
 
     test('should throw for unknow package', () {

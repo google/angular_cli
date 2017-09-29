@@ -6,8 +6,8 @@
 
 import 'package:angular_cli/src/app_logger.dart';
 import 'package:angular_cli/src/command_runner.dart';
-import 'package:angular_cli/src/commands/command.dart';
 import 'package:angular_cli/src/file_writer.dart';
+import 'package:angular_cli/src/path_util.dart';
 import 'package:args/command_runner.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('should fix invalid path', () {
-      expect(NgDartCommand.getNormalizedPath(r'path/to\some/folder'),
+      expect(getNormalizedPath(r'path/to\some/folder'),
           path.join('path', 'to', 'some', 'folder'));
     });
 

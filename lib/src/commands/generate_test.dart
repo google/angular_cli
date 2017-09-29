@@ -7,6 +7,7 @@
 import 'dart:async';
 
 import '../generators/test.dart';
+import '../path_util.dart';
 import 'command.dart';
 
 /// Handles the `generate test` ngdart command.
@@ -23,8 +24,7 @@ class GenerateTestCommand extends NgDartCommand {
       '[--tag <test tag>]';
 
   String get _classUnderTest => argResults[_classOption];
-  String get _testPath =>
-      NgDartCommand.getNormalizedPath(argResults[_testPathOption]);
+  String get _testPath => getNormalizedPath(argResults[_testPathOption]);
   String get _testTag => argResults[_tagOption];
 
   GenerateTestCommand() {

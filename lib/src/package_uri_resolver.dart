@@ -4,11 +4,9 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-import 'package:path/path.dart' as path;
-
 import 'exceptions.dart';
 import 'file_reader.dart';
-import 'visitors/utils.dart';
+import 'path_util.dart';
 
 /// Class to convert a package URI to file URI.
 class PackageUriResolver {
@@ -42,8 +40,8 @@ class PackageUriResolver {
     }
   }
 
-  /// Resolves a package URI to a folder URI.
-  Uri resolve(String packageUri) {
+  /// Resolves a package URI to a file path.
+  String resolve(String packageUri) {
     if (_packageMap == null) _buildPackageMap();
 
     var packageName = getPackageName(packageUri);
@@ -56,6 +54,6 @@ class PackageUriResolver {
     }
 
     var packagePath = getPath(packageUri);
-    return Uri.parse(path.join(_packageMap[packageName], packagePath));
+    return Uri.parse('${_packageMap[packageName]}$packagePath').toFilePath();
   }
 }
