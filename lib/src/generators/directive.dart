@@ -23,11 +23,14 @@ class DirectiveGenerator extends Generator {
       : super(destinationFolder);
 
   factory DirectiveGenerator(
-      EntityName classEntityName,
-      String destinationFolder,
-      ) {
-    return new DirectiveGenerator._(classEntityName.camelCased,
-        classEntityName.lowerCamelCased, classEntityName.underscored, destinationFolder);
+    EntityName classEntityName,
+    String destinationFolder,
+  ) {
+    return new DirectiveGenerator._(
+        classEntityName.camelCased,
+        classEntityName.lowerCamelCased,
+        classEntityName.underscored,
+        destinationFolder);
   }
 
   // Gets a map from template file name to target file name.

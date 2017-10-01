@@ -23,11 +23,14 @@ class PipeGenerator extends Generator {
       : super(destinationFolder);
 
   factory PipeGenerator(
-      EntityName classEntityName,
-      String destinationFolder,
-      ) {
-    return new PipeGenerator._(classEntityName.camelCased,
-        classEntityName.lowerCamelCased, classEntityName.underscored, destinationFolder);
+    EntityName classEntityName,
+    String destinationFolder,
+  ) {
+    return new PipeGenerator._(
+        classEntityName.camelCased,
+        classEntityName.lowerCamelCased,
+        classEntityName.underscored,
+        destinationFolder);
   }
 
   // Gets a map from template file name to target file name.

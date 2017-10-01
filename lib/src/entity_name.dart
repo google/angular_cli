@@ -56,11 +56,11 @@ class EntityName {
     if (!validPatterns.any((pattern) => pattern.hasMatch(name))) {
       throw new ArgumentError(
           '$name is not valid. It should be of form "abc_bcd", '
-              '"AbcBcd", "abcBcd", or "abc-bcd".');
+          '"AbcBcd", "abcBcd", or "abc-bcd".');
     }
 
     final segments =
-    name.split(splitPattern).map((s) => s.toLowerCase()).toList();
+        name.split(splitPattern).map((s) => s.toLowerCase()).toList();
     return new EntityName._(segments);
   }
 
