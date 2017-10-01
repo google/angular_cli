@@ -27,6 +27,12 @@ class EntityName {
   String get camelCased =>
       _segments.map((s) => '${s[0].toUpperCase()}${s.substring(1)}').join('');
 
+  /// Lower Camel Cased format.
+  ///
+  /// Example: abcBcdCde.
+  String get lowerCamelCased =>
+      '${camelCased[0].toLowerCase()}${camelCased.substring(1)}';
+
   /// Underscored format.
   ///
   /// Example: abc_bcd_cde.
@@ -50,11 +56,11 @@ class EntityName {
     if (!validPatterns.any((pattern) => pattern.hasMatch(name))) {
       throw new ArgumentError(
           '$name is not valid. It should be of form "abc_bcd", '
-          '"AbcBcd", "abcBcd", or "abc-bcd".');
+              '"AbcBcd", "abcBcd", or "abc-bcd".');
     }
 
     final segments =
-        name.split(splitPattern).map((s) => s.toLowerCase()).toList();
+    name.split(splitPattern).map((s) => s.toLowerCase()).toList();
     return new EntityName._(segments);
   }
 

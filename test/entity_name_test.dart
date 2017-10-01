@@ -13,6 +13,7 @@ void main() {
       final name = new EntityName('abc_bcd_cde');
       expect(name.spaced, 'Abc Bcd Cde');
       expect(name.camelCased, 'AbcBcdCde');
+      expect(name.lowerCamelCased, 'abcBcdCde');
       expect(name.dashed, 'abc-bcd-cde');
       expect(name.underscored, 'abc_bcd_cde');
     });
