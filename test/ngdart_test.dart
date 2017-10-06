@@ -75,12 +75,68 @@ void main() {
       expect(logger.severeCount, 0);
     });
 
+    test('should generate directive with default path', () async {
+      await runner.run(['generate', 'directive', 'HelloWorldDirective']);
+
+      expect(writer.filesWritten.length, 1);
+      expect(writer.filesWritten[0].startsWith('lib'), isTrue);
+      expect(logger.warningCount, 0);
+      expect(logger.severeCount, 0);
+    });
+
+    test('should generate directive with specified path', () async {
+      final directivePath = path.join('some', 'path');
+      await runner.run([
+        'generate',
+        'directive',
+        '--path=$directivePath',
+        'HelloWorldDirective'
+      ]);
+      expect(writer.filesWritten.length, 1);
+      expect(writer.filesWritten[0].startsWith(directivePath), isTrue);
+      expect(logger.warningCount, 0);
+      expect(logger.severeCount, 0);
+    });
+
+    test('should generate pipe with default path', () async {
+      await runner.run(['generate', 'pipe', 'HelloWorldPipe']);
+
+      expect(writer.filesWritten.length, 1);
+      expect(writer.filesWritten[0].startsWith('lib'), isTrue);
+      expect(logger.warningCount, 0);
+      expect(logger.severeCount, 0);
+    });
+
+    test('should generate pipe with specified path', () async {
+      final directivePath = path.join('some', 'path');
+      await runner.run([
+        'generate',
+        'pipe',
+        '--path=$directivePath',
+        'HelloWorldPipe'
+      ]);
+      expect(writer.filesWritten.length, 1);
+      expect(writer.filesWritten[0].startsWith(directivePath), isTrue);
+      expect(logger.warningCount, 0);
+      expect(logger.severeCount, 0);
+    });
+
     test('should throw UsageException for missing project name', () {
       expect(runner.run(['new']), throwsA(new isInstanceOf<UsageException>()));
     });
 
     test('should throw UsageException for missing component name', () {
       expect(runner.run(['generate', 'component']),
+          throwsA(new isInstanceOf<UsageException>()));
+    });
+
+    test('should throw UsageException for missing directive name', () {
+      expect(runner.run(['generate', 'directive']),
+          throwsA(new isInstanceOf<UsageException>()));
+    });
+
+    test('should throw UsageException for missing pipe name', () {
+      expect(runner.run(['generate', 'pipe']),
           throwsA(new isInstanceOf<UsageException>()));
     });
   });
