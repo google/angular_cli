@@ -27,6 +27,12 @@ class EntityName {
   String get camelCased =>
       _segments.map((s) => '${s[0].toUpperCase()}${s.substring(1)}').join('');
 
+  /// Lower Camel Cased format.
+  ///
+  /// Example: abcBcdCde.
+  String get lowerCamelCased =>
+      '${camelCased[0].toLowerCase()}${camelCased.substring(1)}';
+
   /// Underscored format.
   ///
   /// Example: abc_bcd_cde.

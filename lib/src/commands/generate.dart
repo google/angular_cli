@@ -7,6 +7,8 @@
 import 'command.dart';
 import 'generate_component.dart';
 import 'generate_test.dart';
+import 'package:angular_cli/src/commands/generate_directive.dart';
+import 'package:angular_cli/src/commands/generate_pipe.dart';
 
 /// Handles the `generate` ngdart command.
 class GenerateCommand extends NgDartCommand {
@@ -17,5 +19,7 @@ class GenerateCommand extends NgDartCommand {
   GenerateCommand() {
     addSubcommand(new GenerateComponentCommand());
     addSubcommand(new GenerateTestCommand());
+    addSubcommand(new GenerateDirectiveCommand());
+    addSubcommand(new GeneratePipeCommand());
   }
 }

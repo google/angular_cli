@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Added support for `generate directive`
+- Added support for `generate pipe`
+
 ## 0.1.1
 - Fixed issues on Windows.
 
