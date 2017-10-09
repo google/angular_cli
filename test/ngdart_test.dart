@@ -109,12 +109,8 @@ void main() {
 
     test('should generate pipe with specified path', () async {
       final directivePath = path.join('some', 'path');
-      await runner.run([
-        'generate',
-        'pipe',
-        '--path=$directivePath',
-        'HelloWorldPipe'
-      ]);
+      await runner
+          .run(['generate', 'pipe', '--path=$directivePath', 'HelloWorldPipe']);
       expect(writer.filesWritten.length, 1);
       expect(writer.filesWritten[0].startsWith(directivePath), isTrue);
       expect(logger.warningCount, 0);
