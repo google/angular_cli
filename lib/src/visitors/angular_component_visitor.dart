@@ -6,6 +6,7 @@
 
 import 'package:analyzer/analyzer.dart';
 
+import '../app_logger.dart';
 import '../exceptions.dart';
 import 'binding_helper.dart';
 import 'binding_info.dart';
@@ -20,7 +21,18 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
 
   final Map<String, ComponentInfo> _components;
 
+  // Map to save variables that may be used in @Component.
+  final Map<String, Expression> _variables = new Map();
+
   AngularComponentVisitor(this._classes, this._components);
+
+  /// Collects top level variables that may be used in @Component.
+  @override
+  void visitTopLevelVariableDeclaration(TopLevelVariableDeclaration node) {
+    if (node.variables.variables.length != 1) return;
+    var variable = node.variables.variables[0];
+    _variables[variable.name.name] = variable.initializer;
+  }
 
   @override
   void visitAnnotation(Annotation annotation) {
@@ -66,10 +78,18 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
 
   void _extractDirectives(NamedExpression namedExpression,
       Annotation annotation, ComponentInfo component) {
-    if (namedExpression.expression is! ListLiteral) {
-      throw new InvalidExpressionError(annotation.toString());
+    ListLiteral directives;
+    var value = namedExpression.expression;
+    if (value is SimpleIdentifier && _variables[value.name] is ListLiteral) {
+      directives = _variables[value.name];
+    } else if (value is ListLiteral) {
+      directives = value;
+    } else {
+      AppLogger.log.warning('Cannot parse variable used'
+          ' in directives in $annotation');
+      return;
     }
-    ListLiteral directives = namedExpression.expression as ListLiteral;
+
     for (var node in directives.elements) {
       if (node is SimpleIdentifier || node is PrefixedIdentifier) {
         final templateTypeComponentName = extractName(node);

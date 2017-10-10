@@ -101,6 +101,30 @@ void main() {
           equals(['A', 'B']));
     });
 
+    test('can parse directives which value is a variable', () {
+      final classes = <String, DartClassInfo>{
+        'A': new DartClassInfo('A'),
+        'B': new DartClassInfo('B'),
+        'GtTestComponent': new DartClassInfo('TestComponent')
+      };
+      var component = visit(
+          classes,
+          '''
+        const myDirectives = const [A, B];
+        @Component(
+          selector: 'gt-test',
+          directives: myDirectives,
+          templateUrl: 'gt_test.html'
+        )
+        class GtTestComponent {}
+      ''')['TestComponent'];
+
+      expect(
+          component.templateTypes
+              .map((templateType) => templateType.classInfo.className),
+          equals(['A', 'B']));
+    });
+
     test('should collect component binding list', () {
       final classes = <String, DartClassInfo>{
         'A': new DartClassInfo('A'),
