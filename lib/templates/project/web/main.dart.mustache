@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
-import 'package:{{{name}}}/{{{component.targetName}}}.dart';
+import 'package:{{{name}}}/{{{component.targetName}}}.template.dart' as ng;
 
 void main() {
-  bootstrap({{component.className}});
+  bootstrap(ng.{{component.className}}NgFactory);
 }
