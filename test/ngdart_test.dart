@@ -118,22 +118,22 @@ void main() {
     });
 
     test('should throw UsageException for missing project name', () {
-      expect(runner.run(['new']), throwsA(new isInstanceOf<UsageException>()));
+      expect(runner.run(['new']), throwsA(const TypeMatcher<UsageException>()));
     });
 
     test('should throw UsageException for missing component name', () {
       expect(runner.run(['generate', 'component']),
-          throwsA(new isInstanceOf<UsageException>()));
+          throwsA(const TypeMatcher<UsageException>()));
     });
 
     test('should throw UsageException for missing directive name', () {
       expect(runner.run(['generate', 'directive']),
-          throwsA(new isInstanceOf<UsageException>()));
+          throwsA(const TypeMatcher<UsageException>()));
     });
 
     test('should throw UsageException for missing pipe name', () {
       expect(runner.run(['generate', 'pipe']),
-          throwsA(new isInstanceOf<UsageException>()));
+          throwsA(const TypeMatcher<UsageException>()));
     });
   });
 }

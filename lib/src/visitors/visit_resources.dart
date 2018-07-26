@@ -13,8 +13,9 @@ import 'ast_cache.dart';
 
 /// Used to make analyzing Dart files easier by treating libraries and
 /// parts as one unit.
-Map visitUris(AstCache asts, AstVisitor visitorFn(String, Map)) {
-  var out = <String, dynamic>{};
+Map<String, T> visitUris<T>(
+    AstCache asts, AstVisitor visitorFn(String uri, Map<String, T> out)) {
+  var out = <String, T>{};
 
   for (var uri in asts.allUris) {
     var visitor = visitorFn(uri, out);

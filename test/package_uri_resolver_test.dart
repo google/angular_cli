@@ -46,7 +46,7 @@ void main() {
 
     test('should throw for unknow package', () {
       expect(() => resolver.resolve('package:unknown/some_file.dart'),
-          throwsA(new isInstanceOf<UsageException>()));
+          throwsA(const TypeMatcher<UsageException>()));
     });
   });
 }
@@ -60,11 +60,11 @@ class FileReaderMock implements FileReader {
   ];
 
   @override
-  List<String> readAsLines(Object uri, {Encoding encoding: UTF8}) {
+  List<String> readAsLines(Object uri, {Encoding encoding: utf8}) {
     if (uri is String && uri == '.packages') return _dotPackages;
     return null;
   }
 
   @override
-  String readAsString(Object uri, {Encoding encoding: UTF8}) => null;
+  String readAsString(Object uri, {Encoding encoding: utf8}) => null;
 }
