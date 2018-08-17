@@ -70,21 +70,18 @@ class ProjectModel {
     asts.build();
 
     var dartClasses = <String, DartClassInfo>{};
-    dartClasses.addAll(visitUris(asts,
-            (file, out) => new DartClassVisitor(file, out, asts.publicUris))
-        as Map<String, DartClassInfo>);
+    dartClasses.addAll(visitUris<DartClassInfo>(
+        asts, (file, out) => new DartClassVisitor(file, out, asts.publicUris)));
 
     var components = <String, ComponentInfo>{};
-    components.addAll(visitUris(
-            asts, (_, out) => new AngularComponentVisitor(dartClasses, out))
-        as Map<String, ComponentInfo>);
+    components.addAll(visitUris<ComponentInfo>(
+        asts, (_, out) => new AngularComponentVisitor(dartClasses, out)));
 
     var modules = <String, ModuleInfo>{};
-    modules.addAll(visitUris(
-            asts,
-            (file, out) => new BindingVisitor(
-                file, out, asts.publicUris, _getBindingVariables(components)))
-        as Map<String, ModuleInfo>);
+    modules.addAll(visitUris<ModuleInfo>(
+        asts,
+        (file, out) => new BindingVisitor(
+            file, out, asts.publicUris, _getBindingVariables(components))));
 
     var componentClassName = className;
     if (componentClassName == null) {

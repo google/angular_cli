@@ -1,10 +1,10 @@
 import 'package:angular/angular.dart';
 
 @Directive(
-    selector: '[{{selector}}]')
+  selector: '[{{selector}}]',
+)
 class {{className}} {
-  final ElementRef _elementRef;
+  final Element _element;
 
-  {{className}}(this._elementRef);
+  {{className}}(this._element);
 }
-

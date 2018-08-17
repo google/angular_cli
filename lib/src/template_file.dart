@@ -5,7 +5,7 @@
 // https://developers.google.com/open-source/licenses/bsd
 
 import 'dart:async';
-import "dart:convert" show UTF8;
+import "dart:convert" show utf8;
 
 import 'package:mustache/mustache.dart';
 import 'package:resource/resource.dart' show Resource;
@@ -26,7 +26,7 @@ class TemplateFile {
   Future<String> renderString() async {
     var uri = fixUri('package:angular_cli/templates/$_path');
     var resource = new Resource(uri);
-    var content = await resource.readAsString(encoding: UTF8);
+    var content = await resource.readAsString(encoding: utf8);
 
     var template = new Template(content);
     return template.renderString(_data);

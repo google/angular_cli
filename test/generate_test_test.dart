@@ -101,7 +101,7 @@ var _pubSpec = ['name: hello_angular'];
 
 class FileReaderMock implements FileReader {
   @override
-  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) {
+  List<String> readAsLines(String filePath, {Encoding encoding: utf8}) {
     if (filePath == '.packages') {
       return _dotPackages;
     } else if (filePath == 'pubspec.yaml') {
@@ -111,7 +111,7 @@ class FileReaderMock implements FileReader {
   }
 
   @override
-  String readAsString(String filePath, {Encoding encoding: UTF8}) {
+  String readAsString(String filePath, {Encoding encoding: utf8}) {
     for (var file in _files) {
       if (file['path'] == filePath) return file['content'];
     }
