@@ -25,7 +25,7 @@ abstract class NgDartCommand extends Command {
     }
 
     var arg = args.first;
-    args = args.skip(1);
+    args = args.skip(1).toList();
 
     if (args.length > 0) {
       throw new UsageException('Unexpected argument $args', '');

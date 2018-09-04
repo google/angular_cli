@@ -28,9 +28,7 @@ void main() {
         'TestComponent': new DartClassInfo('TestComponent')
       };
 
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
        library a;
 
        @Component(
@@ -55,9 +53,7 @@ void main() {
         'TestComponent': new DartClassInfo('TestComponent')
       };
 
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
        library a;
 
        @Component(
@@ -77,9 +73,7 @@ void main() {
         'B': new DartClassInfo('B'),
         'TestComponent': new DartClassInfo('TestComponent')
       };
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
         library a;
 
         @Component(
@@ -107,9 +101,7 @@ void main() {
         'B': new DartClassInfo('B'),
         'GtTestComponent': new DartClassInfo('TestComponent')
       };
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
         const myDirectives = const [A, B];
         @Component(
           selector: 'gt-test',
@@ -132,9 +124,7 @@ void main() {
         'TestComponent': new DartClassInfo('TestComponent')
       };
 
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
         library a;
 
         @Component(
@@ -154,9 +144,7 @@ void main() {
         'A': new DartClassInfo('A'),
         'TestComponent': new DartClassInfo('TestComponent')
       };
-      var component = visit(
-          classes,
-          '''
+      var component = visit(classes, '''
         library a;
 
         @Component(

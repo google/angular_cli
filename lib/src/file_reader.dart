@@ -12,9 +12,9 @@ class FileReader {
 
   FileReader._();
 
-  String readAsString(String filePath, {Encoding encoding: UTF8}) =>
+  String readAsString(String filePath, {Encoding encoding: utf8}) =>
       new File(filePath).readAsStringSync(encoding: encoding);
 
-  List<String> readAsLines(String filePath, {Encoding encoding: UTF8}) =>
+  List<String> readAsLines(String filePath, {Encoding encoding: utf8}) =>
       new File(filePath).readAsLinesSync(encoding: encoding);
 }

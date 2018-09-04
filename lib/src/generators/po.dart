@@ -11,7 +11,7 @@ import 'package:path/path.dart' as path;
 import '../file_reader.dart';
 import '../generator.dart';
 import '../page_object_data.dart';
-import '../visitors/component_info.dart';
+import 'package:angular_cli/src/visitors/component_info.dart';
 
 /// Generator for page object.
 class PoGenerator extends Generator {

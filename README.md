@@ -13,12 +13,14 @@ To install:
 
 ```bash
 pub global activate angular_cli
+pub global activate webdev
 ```
 
 To update:
 
 ```bash
 pub global activate angular_cli
+pub global activate webdev
 ```
 
 ## Usage
@@ -42,7 +44,7 @@ will show how to use command `generate test`.
 ngdart new project_name
 cd project_name
 pub get
-pub serve
+webdev serve
 ```
 
 Navigate to `http://localhost:8080` to visit the project you just built.
@@ -72,13 +74,12 @@ and [test][pub_test] package.
 Use command
 
 ```bash
-pub run angular_test --test-arg=--tags=aot --test-arg=--platform=dartium  --test-arg=--reporter=expanded
+pub run build_runner test --fail-on-severe -- -p chrome
 ```
 
-to run generated test with [Dartium][webdev_dartium].
+to run generated test with Chrome.
 
 [webdev_angular]: https://webdev.dartlang.org/angular
-[webdev_dartium]: https://webdev.dartlang.org/tools/dartium
 [page_object]: https://martinfowler.com/bliki/PageObject.html
 [pub_angular_test]: https://pub.dartlang.org/packages/angular_test
 [pub_test]: https://pub.dartlang.org/packages/test
