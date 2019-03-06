@@ -23,7 +23,7 @@ class GenerateComponentCommand extends NgDartCommand {
 
   GenerateComponentCommand() {
     argParser.addOption(_pathOption,
-        abbr: 'p', help: 'Component file path', defaultsTo: 'lib');
+        abbr: 'p', help: 'Component file path', defaultsTo: 'lib/src');
   }
 
   Future run() async {

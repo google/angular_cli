@@ -9,7 +9,7 @@ description: Scaffolding tool for AngularDart
 environment:
   sdk: '>=2.0.0-dev.69.0 <3.0.0'
 executables:
-  ngdart:
+  ngdart2:
 dependencies:
   analyzer: ^0.32.4
   ansicolor: ^1.0.2

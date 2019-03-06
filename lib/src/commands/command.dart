@@ -11,7 +11,7 @@ import '../entity_name.dart';
 
 /// Base class for commands for ngdart executable.
 abstract class NgDartCommand extends Command {
-  static const binaryName = 'ngdart';
+  static const binaryName = 'ngdart2';
   ArgParser get argParser => _argParser;
   final _argParser = new ArgParser(allowTrailingOptions: true);
 

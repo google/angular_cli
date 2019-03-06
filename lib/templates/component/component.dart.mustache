@@ -1,9 +1,13 @@
 import 'package:angular/angular.dart';
 
 @Component(
-  selector: '{{selector}}',
-  templateUrl: '{{targetName}}.html',
-)
+    selector: '{{selector}}',
+    templateUrl: '{{targetName}}.html',
+    styleUrls: const ['{{targetName}}.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    directives: const [],
+    providers: const <Object>[],
+    preserveWhitespace: false)
 class {{className}} {
-  var name = 'Angular';
+
 }

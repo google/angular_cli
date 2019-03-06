@@ -16,7 +16,7 @@ class NgDartCommanderRunner extends CommandRunner {
   static const _verboseOption = 'verbose';
 
   NgDartCommanderRunner()
-      : super('ngdart', 'Ngdart is a command line interface for AngularDart.') {
+      : super('ngdart2', 'Ngdart is a command line interface for AngularDart.') {
     argParser.addFlag(_verboseOption,
         abbr: 'v',
         help: 'Output extra logging information.',

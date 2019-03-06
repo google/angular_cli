@@ -17,6 +17,7 @@ class ComponentGenerator extends Generator {
   static const List<String> _templateFileNames = const [
     'component.dart.mustache',
     'component.html.mustache',
+    'component.less.mustache',
   ];
 
   /// Class name of this component.
@@ -44,7 +45,7 @@ class ComponentGenerator extends Generator {
     var results = <String, String>{};
     for (String templateFileName in _templateFileNames) {
       results[path.join(_templateFolder, templateFileName)] =
-          '$targetName.${templateFileName.split('.')[1]}';
+          '$targetName/$targetName.${templateFileName.split('.')[1]}';
     }
 
     return results;
