@@ -19,9 +19,9 @@ void main() {
     NgDartCommanderRunner runner;
 
     setUp(() {
-      AppLogger.log = logger = new AppLoggerMock();
-      FileWriter.writer = writer = new FileWriterMock();
-      runner = new NgDartCommanderRunner();
+      AppLogger.log = logger = AppLoggerMock();
+      FileWriter.writer = writer = FileWriterMock();
+      runner = NgDartCommanderRunner();
     });
 
     test('should fix invalid path', () {

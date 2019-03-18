@@ -10,16 +10,16 @@ import 'package:ansicolor/ansicolor.dart';
 import 'package:logging/logging.dart';
 
 class AppLogger {
-  static AppLogger log = new AppLogger._('AngularDartCli');
+  static AppLogger log = AppLogger._('AngularDartCli');
 
   final Logger _logger;
 
-  AppLogger._(String name) : _logger = new Logger(name) {
+  AppLogger._(String name) : _logger = Logger(name) {
     final pens = {
-      Level.FINE: new AnsiPen()..blue(),
-      Level.INFO: new AnsiPen()..green(),
-      Level.WARNING: new AnsiPen()..magenta(),
-      Level.SEVERE: new AnsiPen()..red(bold: true)
+      Level.FINE: AnsiPen()..blue(),
+      Level.INFO: AnsiPen()..green(),
+      Level.WARNING: AnsiPen()..magenta(),
+      Level.SEVERE: AnsiPen()..red(bold: true)
     };
 
     Logger.root.onRecord.listen((record) {

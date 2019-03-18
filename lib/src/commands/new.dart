@@ -36,7 +36,7 @@ class NewProjectCommand extends NgDartCommand {
   }
 
   Future run() async {
-    await new ProjectGenerator(readArgAsEntityName('Project name is needed.'),
+    await ProjectGenerator(readArgAsEntityName('Project name is needed.'),
             _projectPath, getEntityName(_rootComponent))
         .generate();
   }

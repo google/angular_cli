@@ -17,7 +17,7 @@ class TestGenerator extends Generator {
   static const _templateFolder = 'test';
   static const _templateFileName = 'test.dart.mustache';
 
-  static final _suffixPattern = new RegExp(r'(Component|View|PO|UnitTestPO)*$');
+  static final _suffixPattern = RegExp(r'(Component|View|PO|UnitTestPO)*$');
 
   final String tag;
   final String componentPath;
@@ -32,16 +32,16 @@ class TestGenerator extends Generator {
   factory TestGenerator(String tag, String componentPath, String className,
       String destinationFolder) {
     var projectModel =
-        new ProjectModel('.packages', 'pubspec.yaml', componentPath, className);
+        ProjectModel('.packages', 'pubspec.yaml', componentPath, className);
     var poClassName =
         projectModel.componentClassName.replaceAll(_suffixPattern, '') + 'PO';
-    var poGenerator = new PoGenerator(
+    var poGenerator = PoGenerator(
         projectModel.components[projectModel.componentClassName],
         componentPath,
         poClassName,
         destinationFolder);
 
-    return new TestGenerator._(
+    return TestGenerator._(
         tag, componentPath, projectModel, poGenerator, destinationFolder);
   }
 

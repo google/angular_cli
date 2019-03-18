@@ -17,9 +17,9 @@ class GenerateCommand extends NgDartCommand {
   String get invocation => '${NgDartCommand.binaryName} generate <subcommand>';
 
   GenerateCommand() {
-    addSubcommand(new GenerateComponentCommand());
-    addSubcommand(new GenerateTestCommand());
-    addSubcommand(new GenerateDirectiveCommand());
-    addSubcommand(new GeneratePipeCommand());
+    addSubcommand(GenerateComponentCommand());
+    addSubcommand(GenerateTestCommand());
+    addSubcommand(GenerateDirectiveCommand());
+    addSubcommand(GeneratePipeCommand());
   }
 }

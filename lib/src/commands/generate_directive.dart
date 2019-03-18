@@ -27,7 +27,7 @@ class GenerateDirectiveCommand extends NgDartCommand {
   }
 
   Future run() async {
-    await new DirectiveGenerator(
+    await DirectiveGenerator(
             readArgAsEntityName('Directive name is needed.'), _directivePath)
         .generate();
   }

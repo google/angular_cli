@@ -13,7 +13,7 @@ import '../entity_name.dart';
 abstract class NgDartCommand extends Command {
   static const binaryName = 'ngdart';
   ArgParser get argParser => _argParser;
-  final _argParser = new ArgParser(allowTrailingOptions: true);
+  final _argParser = ArgParser(allowTrailingOptions: true);
 
   /// Reads argument for current command.
   String readArg(String errorMessage) {
@@ -21,14 +21,14 @@ abstract class NgDartCommand extends Command {
 
     if (args == null || args.length == 0) {
       // Usage is provided by command runner.
-      throw new UsageException(errorMessage, '');
+      throw UsageException(errorMessage, '');
     }
 
     var arg = args.first;
     args = args.skip(1).toList();
 
     if (args.length > 0) {
-      throw new UsageException('Unexpected argument $args', '');
+      throw UsageException('Unexpected argument $args', '');
     }
 
     return arg;
@@ -42,9 +42,9 @@ abstract class NgDartCommand extends Command {
     EntityName entityName;
 
     try {
-      entityName = new EntityName(entity);
+      entityName = EntityName(entity);
     } on ArgumentError catch (error) {
-      throw new UsageException(error.message, '');
+      throw UsageException(error.message, '');
     }
 
     return entityName;

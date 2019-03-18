@@ -32,7 +32,7 @@ class DirectiveGenerator extends Generator {
     EntityName classEntityName,
     String destinationFolder,
   ) {
-    return new DirectiveGenerator._(
+    return DirectiveGenerator._(
         classEntityName.camelCased,
         classEntityName.lowerCamelCased,
         classEntityName.underscored,

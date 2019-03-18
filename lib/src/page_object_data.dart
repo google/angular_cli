@@ -26,19 +26,19 @@ class PageObjectData {
 
     var variables = document
         .querySelectorAll('*')
-        .map((element) => new _Variable.fromElement(element))
+        .map((element) => _Variable.fromElement(element))
         .where((variable) => variable != null)
         .toList(growable: false)
           ..sort();
 
-    return new PageObjectData._internal(document, variables);
+    return PageObjectData._internal(document, variables);
   }
 
   PageObjectData._internal(this.document, this.variables);
 }
 
 class _Selector {
-  static const ignoredTags = const [
+  static const ignoredTags = [
     'a',
     'p',
     'b',
@@ -71,14 +71,14 @@ class _Selector {
     }
 
     if (element.id.isNotEmpty) {
-      return new _Selector('ById', element.id);
+      return _Selector('ById', element.id);
     }
 
     if (element.classes.isNotEmpty) {
-      return new _Selector('ByClass', element.classes.first);
+      return _Selector('ByClass', element.classes.first);
     }
 
-    return new _Selector('ByTagName', element.localName);
+    return _Selector('ByTagName', element.localName);
   }
 
   _Selector(this.type, this.name, [this.value]);
@@ -88,7 +88,7 @@ class _Selector {
 }
 
 class _Variable implements Comparable<_Variable> {
-  static final wordReg = new RegExp(r'(^|[\-._])(\w)');
+  static final wordReg = RegExp(r'(^|[\-._])(\w)');
 
   final Element element;
   final _Selector selector;
@@ -98,16 +98,16 @@ class _Variable implements Comparable<_Variable> {
   final String name;
 
   factory _Variable.fromElement(Element element) {
-    var selector = new _Selector.fromElement(element);
+    var selector = _Selector.fromElement(element);
     if (selector == null) {
       return null;
     }
 
-    var type = new DartClassInfo(
-        'PageLoaderElement', 'package:pageloader/objects.dart');
+    var type =
+        DartClassInfo('PageLoaderElement', 'package:pageloader/objects.dart');
 
-    return new _Variable(element, _getCamelCasedName(selector.name), selector,
-        type, _isElementInList(element), _isElementInIf(element));
+    return _Variable(element, _getCamelCasedName(selector.name), selector, type,
+        _isElementInList(element), _isElementInIf(element));
   }
 
   _Variable(this.element, this.name, this.selector, this.type,
@@ -160,7 +160,7 @@ class _Variable implements Comparable<_Variable> {
   }
 
   String get _getFirstCharacterLoweredName =>
-      name.replaceFirstMapped(new RegExp('^(.)'), (m) => m[1].toLowerCase());
+      name.replaceFirstMapped(RegExp('^(.)'), (m) => m[1].toLowerCase());
 
   @override
   int compareTo(_Variable other) => name.compareTo(other.name);

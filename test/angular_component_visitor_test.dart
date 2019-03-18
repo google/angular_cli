@@ -16,16 +16,16 @@ void main() {
         Map<String, DartClassInfo> classes, String content) {
       var compilationUnit = parseCompilationUnit(content);
       var out = <String, ComponentInfo>{};
-      var visitor = new AngularComponentVisitor(classes, out);
+      var visitor = AngularComponentVisitor(classes, out);
       compilationUnit.accept(visitor);
       return out;
     }
 
     test('should parse an Angular component', () {
       final classes = <String, DartClassInfo>{
-        'A': new DartClassInfo('A'),
-        'B': new DartClassInfo('B'),
-        'TestComponent': new DartClassInfo('TestComponent')
+        'A': DartClassInfo('A'),
+        'B': DartClassInfo('B'),
+        'TestComponent': DartClassInfo('TestComponent')
       };
 
       var component = visit(classes, '''
@@ -50,7 +50,7 @@ void main() {
 
     test('should collect inline template', () {
       final classes = <String, DartClassInfo>{
-        'TestComponent': new DartClassInfo('TestComponent')
+        'TestComponent': DartClassInfo('TestComponent')
       };
 
       var component = visit(classes, '''
@@ -69,9 +69,9 @@ void main() {
 
     test('can combine component and view tags values', () {
       final classes = <String, DartClassInfo>{
-        'A': new DartClassInfo('A'),
-        'B': new DartClassInfo('B'),
-        'TestComponent': new DartClassInfo('TestComponent')
+        'A': DartClassInfo('A'),
+        'B': DartClassInfo('B'),
+        'TestComponent': DartClassInfo('TestComponent')
       };
       var component = visit(classes, '''
         library a;
@@ -97,9 +97,9 @@ void main() {
 
     test('can parse directives which value is a variable', () {
       final classes = <String, DartClassInfo>{
-        'A': new DartClassInfo('A'),
-        'B': new DartClassInfo('B'),
-        'GtTestComponent': new DartClassInfo('TestComponent')
+        'A': DartClassInfo('A'),
+        'B': DartClassInfo('B'),
+        'GtTestComponent': DartClassInfo('TestComponent')
       };
       var component = visit(classes, '''
         const myDirectives = const [A, B];
@@ -119,9 +119,9 @@ void main() {
 
     test('should collect component binding list', () {
       final classes = <String, DartClassInfo>{
-        'A': new DartClassInfo('A'),
-        'B': new DartClassInfo('B'),
-        'TestComponent': new DartClassInfo('TestComponent')
+        'A': DartClassInfo('A'),
+        'B': DartClassInfo('B'),
+        'TestComponent': DartClassInfo('TestComponent')
       };
 
       var component = visit(classes, '''
@@ -141,8 +141,8 @@ void main() {
 
     test('should collect component binding variable', () {
       final classes = <String, DartClassInfo>{
-        'A': new DartClassInfo('A'),
-        'TestComponent': new DartClassInfo('TestComponent')
+        'A': DartClassInfo('A'),
+        'TestComponent': DartClassInfo('TestComponent')
       };
       var component = visit(classes, '''
         library a;

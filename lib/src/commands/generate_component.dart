@@ -27,7 +27,7 @@ class GenerateComponentCommand extends NgDartCommand {
   }
 
   Future run() async {
-    await new ComponentGenerator(
+    await ComponentGenerator(
             readArgAsEntityName('Component name is needed.'), _componentPath)
         .generate();
   }

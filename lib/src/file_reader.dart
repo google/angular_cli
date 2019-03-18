@@ -8,13 +8,13 @@ import 'dart:convert';
 import 'dart:io';
 
 class FileReader {
-  static FileReader reader = new FileReader._();
+  static FileReader reader = FileReader._();
 
   FileReader._();
 
-  String readAsString(String filePath, {Encoding encoding: utf8}) =>
-      new File(filePath).readAsStringSync(encoding: encoding);
+  String readAsString(String filePath, {Encoding encoding = utf8}) =>
+      File(filePath).readAsStringSync(encoding: encoding);
 
-  List<String> readAsLines(String filePath, {Encoding encoding: utf8}) =>
-      new File(filePath).readAsLinesSync(encoding: encoding);
+  List<String> readAsLines(String filePath, {Encoding encoding = utf8}) =>
+      File(filePath).readAsLinesSync(encoding: encoding);
 }

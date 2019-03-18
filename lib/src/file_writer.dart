@@ -9,17 +9,17 @@ import 'dart:io';
 import 'app_logger.dart';
 
 class FileWriter {
-  static FileWriter writer = new FileWriter._();
+  static FileWriter writer = FileWriter._();
 
   FileWriter._();
 
   /// Writes content to [destination]. Throws StateError if
   /// destination exists. Folder will be created if not exists.
   void write(String destination, String content) {
-    var file = new File(destination);
+    var file = File(destination);
 
     if (file.existsSync()) {
-      throw new StateError('File $destination already exists');
+      throw StateError('File $destination already exists');
     }
 
     if (!file.parent.existsSync()) {

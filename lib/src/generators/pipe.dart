@@ -32,7 +32,7 @@ class PipeGenerator extends Generator {
     EntityName classEntityName,
     String destinationFolder,
   ) {
-    return new PipeGenerator._(
+    return PipeGenerator._(
         classEntityName.camelCased,
         classEntityName.lowerCamelCased,
         classEntityName.underscored,

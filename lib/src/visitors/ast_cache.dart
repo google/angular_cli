@@ -39,7 +39,7 @@ class AstCache {
     _setAst(_uri);
 
     // Collects imported URIs using BFS.
-    var queue = new Queue<String>();
+    var queue = Queue<String>();
     queue.add(_uri);
     while (queue.isNotEmpty) {
       var head = queue.removeFirst();
@@ -88,7 +88,7 @@ class AstCache {
   /// This function will also set [publicUris] in case an implementation file
   /// is exported.
   Set<String> _getReferencedUris(String uri, CompilationUnit compilationUnit) {
-    var results = new Set<String>();
+    var results = Set<String>();
 
     for (var directive in compilationUnit.directives) {
       if (directive is! ImportDirective && directive is! ExportDirective) {

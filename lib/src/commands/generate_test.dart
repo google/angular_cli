@@ -40,7 +40,7 @@ class GenerateTestCommand extends NgDartCommand {
   }
 
   Future run() async {
-    await new TestGenerator(
+    await TestGenerator(
             _testTag,
             readArg('path for Angular component file is needed.'),
             _classUnderTest,

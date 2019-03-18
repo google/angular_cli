@@ -16,7 +16,7 @@ class BindingInstance extends BindingInfo {
   final String creationExpression;
 
   /// Classes used in [creationExpression].
-  final Set<String> referencedClasses = new Set();
+  final Set<String> referencedClasses = Set();
 
   BindingInstance(this.className, this.creationExpression);
 
@@ -63,7 +63,7 @@ class ModuleInfo extends BindingInfo {
       if (binding is String) {
         if (allModules[binding] == null) {
           // This is a class or an OpaqueToken.
-          _allBindingInstances.add(new BindingInstance(binding, binding));
+          _allBindingInstances.add(BindingInstance(binding, binding));
         } else {
           _allBindingInstances
               .addAll(allModules[binding].getAllBindingInstances(allModules));

@@ -14,7 +14,7 @@ void main() {
     Map<String, DartClassInfo> visit(String content) {
       var compilationUnit = parseCompilationUnit(content);
       var out = <String, DartClassInfo>{};
-      var visitor = new DartClassVisitor('', out, {});
+      var visitor = DartClassVisitor('', out, {});
       compilationUnit.accept(visitor);
       return out;
     }

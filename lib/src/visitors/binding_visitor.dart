@@ -48,7 +48,7 @@ class BindingVisitor extends RecursiveAstVisitor {
       return;
     }
 
-    var module = _bindingInfo.putIfAbsent(name, () => new ModuleInfo());
+    var module = _bindingInfo.putIfAbsent(name, () => ModuleInfo());
     module.name = name;
     module.uri = _publicUris[_uri];
 

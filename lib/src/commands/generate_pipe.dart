@@ -27,8 +27,7 @@ class GeneratePipeCommand extends NgDartCommand {
   }
 
   Future run() async {
-    await new PipeGenerator(
-            readArgAsEntityName('Pipe name is needed.'), _pipePath)
+    await PipeGenerator(readArgAsEntityName('Pipe name is needed.'), _pipePath)
         .generate();
   }
 }

@@ -39,10 +39,10 @@ class ProjectGenerator extends Generator {
       String destinationFolder, EntityName componentClassEntityName) {
     destinationFolder =
         path.join(destinationFolder, projectEntityName.underscored);
-    var component = new ComponentGenerator(
+    var component = ComponentGenerator(
         componentClassEntityName, path.join(destinationFolder, 'lib'));
 
-    return new ProjectGenerator._(projectEntityName.underscored,
+    return ProjectGenerator._(projectEntityName.underscored,
         projectEntityName.spaced, component, destinationFolder);
   }
 

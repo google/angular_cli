@@ -65,22 +65,22 @@ class ProjectModel {
             'package:$projectName/${componentPath.substring(libPrefix.length)}')
         : fixUri('package:$projectName/$componentPath');
 
-    var uriResolver = new PackageUriResolver(dotPackagesFilePath);
-    var asts = new AstCache(componentClassUri, uriResolver);
+    var uriResolver = PackageUriResolver(dotPackagesFilePath);
+    var asts = AstCache(componentClassUri, uriResolver);
     asts.build();
 
     var dartClasses = <String, DartClassInfo>{};
     dartClasses.addAll(visitUris<DartClassInfo>(
-        asts, (file, out) => new DartClassVisitor(file, out, asts.publicUris)));
+        asts, (file, out) => DartClassVisitor(file, out, asts.publicUris)));
 
     var components = <String, ComponentInfo>{};
     components.addAll(visitUris<ComponentInfo>(
-        asts, (_, out) => new AngularComponentVisitor(dartClasses, out)));
+        asts, (_, out) => AngularComponentVisitor(dartClasses, out)));
 
     var modules = <String, ModuleInfo>{};
     modules.addAll(visitUris<ModuleInfo>(
         asts,
-        (file, out) => new BindingVisitor(
+        (file, out) => BindingVisitor(
             file, out, asts.publicUris, _getBindingVariables(components))));
 
     var componentClassName = className;
@@ -92,7 +92,7 @@ class ProjectModel {
     var serviceClasses = _getServiceClasses(
         componentClassName, dartClasses, components, modules);
 
-    return new ProjectModel._(projectName, componentClassName, serviceClasses,
+    return ProjectModel._(projectName, componentClassName, serviceClasses,
         componentClassUri, dartClasses, components, modules);
   }
 }
@@ -103,7 +103,7 @@ String _getProjectName(String pubspecFilePath) {
   try {
     lines = FileReader.reader.readAsLines(pubspecFilePath);
   } catch (e) {
-    throw new UsageException(
+    throw UsageException(
         'Error happened when reading pubspec.yaml. '
         'Command generate test should be run '
         'under root directory of the project.',
@@ -117,12 +117,12 @@ String _getProjectName(String pubspecFilePath) {
     }
   }
 
-  throw new FormatException('Invalid pubspec.yaml: cannot find project name');
+  throw FormatException('Invalid pubspec.yaml: cannot find project name');
 }
 
 /// Gets binding variables used in providers of @Component.
 Set<String> _getBindingVariables(Map<String, ComponentInfo> components) {
-  var result = new Set<String>();
+  var result = Set<String>();
 
   for (var component in components.values) {
     if (component.module == null) continue;
@@ -144,8 +144,7 @@ String _getComponentClassName(
     }
   }
 
-  throw new UsageException(
-      'Cannot find a component class in specified path.', '');
+  throw UsageException('Cannot find a component class in specified path.', '');
 }
 
 /// Gets all service classes used in [componentClassName] that need binding.

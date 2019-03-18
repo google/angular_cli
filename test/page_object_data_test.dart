@@ -10,7 +10,7 @@ import 'package:test/test.dart';
 void main() {
   group('PageObjectData', () {
     test('should generate items.', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<action-button class="good"></action-button>',
       );
       expect(po.variables.first.getterString,
@@ -21,7 +21,7 @@ void main() {
     });
 
     test('should generate items in list', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<action-button class="good" *ngFor="xxx"></action-button>',
       );
       expect(po.variables.first.getterString,
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('should generate items in parents list', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<p *ngFor="xxx"><action-button class="good">'
             '</action-button></p>',
       );
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('should generate items with default type', () {
-      var po = new PageObjectData('<some-widget class="cool"></some-widget>');
+      var po = PageObjectData('<some-widget class="cool"></some-widget>');
       expect(po.variables.first.getterString,
           'Future<PageLoaderElement> get cool => _getCool();');
       expect(po.variables.first.internalString,
@@ -51,13 +51,13 @@ void main() {
     });
 
     test('should sort generated items', () {
-      var po1 = new PageObjectData(
+      var po1 = PageObjectData(
         '<action-button class="good"></action-button>'
             '<action-button class="bad"></action-button>',
       );
       expect(po1.variables.first.name, 'Bad');
       expect(po1.variables.last.name, 'Good');
-      var po2 = new PageObjectData(
+      var po2 = PageObjectData(
         '<action-button class="good"></action-button>'
             '<action-button class="bad"></action-button>',
       );
@@ -66,30 +66,30 @@ void main() {
     });
 
     test('should ignore some tags.', () {
-      var po = new PageObjectData('<p>123</p>');
+      var po = PageObjectData('<p>123</p>');
       expect(po.variables.isEmpty, true);
     });
 
     test('should add optional annotation.', () {
-      var po = new PageObjectData('<some-widget *ngIf="1"></some-widget>');
+      var po = PageObjectData('<some-widget *ngIf="1"></some-widget>');
       expect(po.variables[0].internalString, startsWith('@optional'));
     });
 
     test('should add optional annotation when parent is optional.', () {
-      var po = new PageObjectData(
-          '<div *ngIf="1"><some-widget></some-widget></div>');
+      var po =
+          PageObjectData('<div *ngIf="1"><some-widget></some-widget></div>');
       expect(po.variables[0].internalString, startsWith('@optional'));
     });
 
     test('should add optional annotation when in <template [ngIf]>', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<template [ngIf]="1"><some-widget></some-widget></template>',
       );
       expect(po.variables[0].internalString, startsWith('@optional'));
     });
 
     test('should choose correct selector.', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<some-widget class="cool"></some-widget>'
             '<some-widget class="cool" id="cooler"></some-widget>'
             '<some-widget></some-widget>',
@@ -101,7 +101,7 @@ void main() {
     });
 
     test('should work with selectors with attributes', () {
-      var po = new PageObjectData(
+      var po = PageObjectData(
         '<some-cell class="field-class"></some-cell>'
             '<some-cell id="fieldWithId"></some-cell>',
       );
@@ -113,9 +113,9 @@ void main() {
     });
 
     test('should produce correct commonDependencies.', () {
-      var po1 = new PageObjectData('');
+      var po1 = PageObjectData('');
       expect(po1.commonDependencies, [PageObjectData.pageLoaderDependency]);
-      var po3 = new PageObjectData('<some-widget></some-widget>');
+      var po3 = PageObjectData('<some-widget></some-widget>');
       expect(po3.commonDependencies, [
         PageObjectData.pageLoaderDependency,
         PageObjectData.asyncDependency

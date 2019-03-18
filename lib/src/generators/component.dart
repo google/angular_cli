@@ -14,7 +14,7 @@ import '../generator.dart';
 /// Generator for Angular component.
 class ComponentGenerator extends Generator {
   static const _templateFolder = 'component';
-  static const List<String> _templateFileNames = const [
+  static const List<String> _templateFileNames = [
     'component.dart.mustache',
     'component.html.mustache',
   ];
@@ -35,7 +35,7 @@ class ComponentGenerator extends Generator {
     EntityName classEntityName,
     String destinationFolder,
   ) {
-    return new ComponentGenerator._(classEntityName.camelCased,
+    return ComponentGenerator._(classEntityName.camelCased,
         classEntityName.dashed, classEntityName.underscored, destinationFolder);
   }
 

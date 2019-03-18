@@ -11,7 +11,7 @@ import 'package:path/path.dart' as path;
 /// For example:
 ///   'path\to/folder' -> 'path/to/folder' (posix)
 String getNormalizedPath(String oldPath) =>
-    path.normalize(path.joinAll(oldPath.split(new RegExp(r'[\\/]')))).trim();
+    path.normalize(path.joinAll(oldPath.split(RegExp(r'[\\/]')))).trim();
 
 /// Converts '\' in [uri] into '/'.
 String fixUri(String uri) => uri.replaceAll('\\', '/');

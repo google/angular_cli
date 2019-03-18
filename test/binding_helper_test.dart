@@ -14,7 +14,7 @@ void main() {
     _BindingVisitorForTest visitor;
 
     setUp(() {
-      visitor = new _BindingVisitorForTest();
+      visitor = _BindingVisitorForTest();
     });
 
     parse(String contents) {
@@ -67,7 +67,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
     });
 
     test('should parse "provide(const A(), useExisting: B)"', () {
@@ -77,7 +77,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
     });
 
     // May need to add support for this scenario.
@@ -94,7 +94,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
       expect(binding.creationExpression, bindingStr);
     });
 
@@ -107,7 +107,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B', 'C'])));
+      expect(binding.referencedClasses, equals(Set.from(['B', 'C'])));
       expect(binding.creationExpression, bindingStr);
     });
 
@@ -118,7 +118,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
     });
 
     test("should parse const Provider('someThing', useValue: new B())", () {
@@ -128,7 +128,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'someThing');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
     });
 
     test('should parse list in deps', () {
@@ -142,7 +142,7 @@ void main() {
       expect(visitor.modules['x'].directChildren.length, 1);
       var binding = visitor.modules['x'].directChildren[0] as BindingInstance;
       expect(binding.className, 'A');
-      expect(binding.referencedClasses, equals(new Set.from(['B'])));
+      expect(binding.referencedClasses, equals(Set.from(['B'])));
     });
   });
 
@@ -150,7 +150,7 @@ void main() {
     _BindingVisitorForTest visitor;
 
     setUp(() {
-      visitor = new _BindingVisitorForTest();
+      visitor = _BindingVisitorForTest();
     });
 
     parse(String contents) {
@@ -210,7 +210,7 @@ class _BindingVisitorForTest extends RecursiveAstVisitor {
     var name = variable.name.name;
     var initializer = variable.initializer;
 
-    var module = modules.putIfAbsent(name, () => new ModuleInfo());
+    var module = modules.putIfAbsent(name, () => ModuleInfo());
     module.name = name;
 
     if (initializer is ListLiteral) {

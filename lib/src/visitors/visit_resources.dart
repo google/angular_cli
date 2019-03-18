@@ -19,7 +19,7 @@ Map<String, T> visitUris<T>(
 
   for (var uri in asts.allUris) {
     var visitor = visitorFn(uri, out);
-    new _LibraryAndParts(asts, uri).accept(visitor);
+    _LibraryAndParts(asts, uri).accept(visitor);
   }
 
   return out;
@@ -36,14 +36,14 @@ class _LibraryAndParts {
 
   void accept(AstVisitor visitor) {
     var compilationUnit = _asts.getCompilationUnit(_uri);
-    var isLibraryVisitor = new _IsLibraryVisitor();
+    var isLibraryVisitor = _IsLibraryVisitor();
     compilationUnit.accept(isLibraryVisitor);
     if (!isLibraryVisitor.isLibrary) return;
 
     compilationUnit.accept(visitor);
 
     var parts = _uriParts.putIfAbsent(_uri, () {
-      var partVisitor = new _PartVisitor();
+      var partVisitor = _PartVisitor();
       compilationUnit.accept(partVisitor);
       return partVisitor.parts;
     });

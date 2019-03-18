@@ -8,13 +8,13 @@
 class EntityName {
   static final validPatterns = <RegExp>[
     // abc_bcd
-    new RegExp(r'^[a-z][a-z0-9]*(_[a-z0-9]+)*$'),
+    RegExp(r'^[a-z][a-z0-9]*(_[a-z0-9]+)*$'),
     // AbcBcd or abcBcd
-    new RegExp(r'^([A-Za-z][a-z0-9]*)*$'),
+    RegExp(r'^([A-Za-z][a-z0-9]*)*$'),
     // abc-bcd
-    new RegExp(r'^[a-z][a-z0-9]*(-[a-z0-9]+)*$')
+    RegExp(r'^[a-z][a-z0-9]*(-[a-z0-9]+)*$')
   ];
-  static final splitPattern = new RegExp(r'(?=[A-Z])|_|-');
+  static final splitPattern = RegExp(r'(?=[A-Z])|_|-');
 
   // Segments for the name.
   //
@@ -54,14 +54,13 @@ class EntityName {
   /// Currently patterns like abc_bcd, AbcBcd, abcBcd, abc-bcd are supported.
   factory EntityName(String name) {
     if (!validPatterns.any((pattern) => pattern.hasMatch(name))) {
-      throw new ArgumentError(
-          '$name is not valid. It should be of form "abc_bcd", '
+      throw ArgumentError('$name is not valid. It should be of form "abc_bcd", '
           '"AbcBcd", "abcBcd", or "abc-bcd".');
     }
 
     final segments =
         name.split(splitPattern).map((s) => s.toLowerCase()).toList();
-    return new EntityName._(segments);
+    return EntityName._(segments);
   }
 
   EntityName._(this._segments);

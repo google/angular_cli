@@ -10,7 +10,7 @@ import 'package:test/test.dart';
 void main() {
   group('Entity name', () {
     test('should produce correct formats of names', () {
-      final name = new EntityName('abc_bcd_cde');
+      final name = EntityName('abc_bcd_cde');
       expect(name.spaced, 'Abc Bcd Cde');
       expect(name.camelCased, 'AbcBcdCde');
       expect(name.lowerCamelCased, 'abcBcdCde');
@@ -18,17 +18,17 @@ void main() {
       expect(name.underscored, 'abc_bcd_cde');
     });
     test('should be handle to handle different types of input', () {
-      final camelCasedName1 = new EntityName('AbcBcdCde');
+      final camelCasedName1 = EntityName('AbcBcdCde');
       expect(camelCasedName1.underscored, 'abc_bcd_cde');
-      final camelCasedName2 = new EntityName('abcBcdCde');
+      final camelCasedName2 = EntityName('abcBcdCde');
       expect(camelCasedName2.underscored, 'abc_bcd_cde');
-      final dashedName = new EntityName('abc-bcd-cde');
+      final dashedName = EntityName('abc-bcd-cde');
       expect(dashedName.underscored, 'abc_bcd_cde');
     });
     test('should throw for incorrect formats', () {
-      expect(() => new EntityName('Abc-bcd'), throwsArgumentError);
-      expect(() => new EntityName('abc-bcd_cde'), throwsArgumentError);
-      expect(() => new EntityName('_abc'), throwsArgumentError);
+      expect(() => EntityName('Abc-bcd'), throwsArgumentError);
+      expect(() => EntityName('abc-bcd_cde'), throwsArgumentError);
+      expect(() => EntityName('_abc'), throwsArgumentError);
     });
   });
 }

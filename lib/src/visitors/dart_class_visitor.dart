@@ -101,13 +101,13 @@ class DartClassVisitor extends RecursiveAstVisitor {
 
         final parameterType = _getParameterType(parameter, classInfo);
 
-        classInfo.constructorParameters.add(new ConstructorParameter(
+        classInfo.constructorParameters.add(ConstructorParameter(
             annotations, parameterType, parameter.identifier.name, tokenName));
       } else if (parameter is DefaultFormalParameter ||
           parameter is FunctionTypedFormalParameter) {
         // Defaults are not supported in DI.
       } else {
-        throw new UnsupportedError(
+        throw UnsupportedError(
             'Unable to handle parameter ${parameter.runtimeType} '
             'for ${className(constructor.parent)} in $_uri.');
       }
@@ -196,8 +196,7 @@ class DartClassVisitor extends RecursiveAstVisitor {
   ///
   /// For example, for class 'List<InnerType>', the group 1 of this class will
   /// be 'InnerType'.
-  static final RegExp _genericClassPattern =
-      new RegExp(r'^[a-zA-Z_0-9]*<(.*)>$');
+  static final RegExp _genericClassPattern = RegExp(r'^[a-zA-Z_0-9]*<(.*)>$');
 
   /// Gets [DartClassInfo] for [className].
   ///
@@ -212,10 +211,10 @@ class DartClassVisitor extends RecursiveAstVisitor {
       if (match != null) {
         final innerClass = _getClass(match.group(1));
         return _dartClasses[className] =
-            new DartClassInfo(className, innerClass.uri);
+            DartClassInfo(className, innerClass.uri);
       }
 
-      _dartClasses[className] = new DartClassInfo(className);
+      _dartClasses[className] = DartClassInfo(className);
     }
     return _dartClasses[className];
   }
@@ -239,7 +238,7 @@ class DartClassVisitor extends RecursiveAstVisitor {
 
     var args = metadata[0].arguments.arguments;
     if (args.length != 1) {
-      throw new InvalidExpressionError('$metadata in $_uri.');
+      throw InvalidExpressionError('$metadata in $_uri.');
     }
 
     var args0 = args[0];
@@ -251,6 +250,6 @@ class DartClassVisitor extends RecursiveAstVisitor {
       return args0.value;
     }
 
-    throw new InvalidExpressionError('$metadata in $_uri.');
+    throw InvalidExpressionError('$metadata in $_uri.');
   }
 }

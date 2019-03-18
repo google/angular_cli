@@ -22,8 +22,8 @@ class NgDartCommanderRunner extends CommandRunner {
         help: 'Output extra logging information.',
         defaultsTo: false);
 
-    addCommand(new NewProjectCommand());
-    addCommand(new GenerateCommand());
+    addCommand(NewProjectCommand());
+    addCommand(GenerateCommand());
   }
 
   Future run(Iterable<String> args) async {

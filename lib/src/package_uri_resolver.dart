@@ -24,7 +24,7 @@ class PackageUriResolver {
     try {
       lines = FileReader.reader.readAsLines(_dotPackagesFilePath);
     } catch (e) {
-      throw new UsageException(
+      throw UsageException(
           'Error when reading $_dotPackagesFilePath, '
           'please run pub get first.',
           '');
@@ -47,7 +47,7 @@ class PackageUriResolver {
     var packageName = getPackageName(packageUri);
 
     if (_packageMap[packageName] == null) {
-      throw new UsageException(
+      throw UsageException(
           'Cannot locate $packageName, '
           'probably you need to run pub get again',
           '');

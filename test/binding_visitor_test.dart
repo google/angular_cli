@@ -14,7 +14,7 @@ void main() {
     Map<String, ModuleInfo> visit(String content) {
       var compilationUnit = parseCompilationUnit(content);
       var out = <String, ModuleInfo>{};
-      var visitor = new BindingVisitor('', out, {}, new Set<String>());
+      var visitor = BindingVisitor('', out, {}, Set<String>());
       compilationUnit.accept(visitor);
       return out;
     }

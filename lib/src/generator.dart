@@ -20,7 +20,7 @@ abstract class Generator {
   /// Renders templates and writes to target files.
   Future renderAndWriteTemplates(Map<String, String> templateTargets) async {
     for (final template in templateTargets.keys) {
-      final content = await new TemplateFile(template, this).renderString();
+      final content = await TemplateFile(template, this).renderString();
       FileWriter.writer.write(
           path.join(_destinationFolder, templateTargets[template]), content);
     }

@@ -37,13 +37,13 @@ class PoGenerator extends Generator {
       var componentTemplateFilePath =
           path.join(path.dirname(componentPath), componentInfo.templatePath);
 
-      pageObjectData = new PageObjectData(
+      pageObjectData = PageObjectData(
           FileReader.reader.readAsString(componentTemplateFilePath));
     } else {
-      pageObjectData = new PageObjectData(componentInfo.inlineTemplate);
+      pageObjectData = PageObjectData(componentInfo.inlineTemplate);
     }
 
-    return new PoGenerator._(
+    return PoGenerator._(
         componentPath,
         poClassName,
         '${path.basenameWithoutExtension(componentPath)}_po.dart',

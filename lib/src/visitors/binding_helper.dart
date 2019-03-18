@@ -53,7 +53,7 @@ void processBindingElement(Expression node, ModuleInfo module) {
   } else if (node is MethodInvocation) {
     binding = _getBindingFromMethodInvocation(node);
   } else {
-    throw new UnsupportedError('Unable to handle $node.');
+    throw UnsupportedError('Unable to handle $node.');
   }
 
   if (binding != null) module.directChildren.add(binding);
@@ -66,7 +66,7 @@ void processBindingElement(Expression node, ModuleInfo module) {
 BindingInstance _getBindingFromCreationExpression(
     InstanceCreationExpression node) {
   if (extractName(node.constructorName.type.name) != 'Provider') {
-    throw new UnsupportedError(
+    throw UnsupportedError(
         'Unable to handle ${node.constructorName.type.name} in $node');
   }
 
@@ -79,12 +79,11 @@ BindingInstance _getBindingFromCreationExpression(
 ///   provide(ClassABC, ...).
 BindingInstance _getBindingFromMethodInvocation(MethodInvocation node) {
   if (node.target != null) {
-    throw new UnsupportedError('Unable to handle ${node.target} in $node');
+    throw UnsupportedError('Unable to handle ${node.target} in $node');
   }
 
   if (node.methodName.name != 'provide') {
-    throw new UnsupportedError(
-        'Unable to handle ${node.methodName.name} in $node');
+    throw UnsupportedError('Unable to handle ${node.methodName.name} in $node');
   }
 
   return _buildBindingInstance(node.argumentList.arguments, node.toString());
@@ -92,19 +91,19 @@ BindingInstance _getBindingFromMethodInvocation(MethodInvocation node) {
 
 BindingInstance _buildBindingInstance(
     NodeList<Expression> args, String creationExpression) {
-  if (args.isEmpty) throw new InvalidExpressionError(creationExpression);
+  if (args.isEmpty) throw InvalidExpressionError(creationExpression);
 
   BindingInstance binding;
   var token = args[0];
   if (token is SimpleIdentifier || token is PrefixedIdentifier) {
     // Expression is an OpaqueToken or a class name.
-    binding = new BindingInstance(extractName(token), creationExpression);
+    binding = BindingInstance(extractName(token), creationExpression);
   } else if (token is InstanceCreationExpression) {
     // Expression is to create a class instance.
-    binding = new BindingInstance(
+    binding = BindingInstance(
         extractName(token.constructorName.type.name), creationExpression);
   } else if (token is SimpleStringLiteral) {
-    binding = new BindingInstance(token.value, creationExpression);
+    binding = BindingInstance(token.value, creationExpression);
   }
 
   if (binding != null) {
@@ -112,7 +111,7 @@ BindingInstance _buildBindingInstance(
     return binding;
   }
 
-  throw new UnsupportedError('Unable to handle $token '
+  throw UnsupportedError('Unable to handle $token '
       '(${token.runtimeType}) in $creationExpression');
 }
 
@@ -122,8 +121,7 @@ String _extractClassName(Expression expression) {
     return extractName(expression);
   }
 
-  throw new UnsupportedError(
-      'Unable to handle $expression for toClass / toAlias');
+  throw UnsupportedError('Unable to handle $expression for toClass / toAlias');
 }
 
 /// Collects all referenced classes in binding creation [expression]
@@ -140,7 +138,7 @@ void _addReferencedClasses(
       _addReferencedClasses(dependency, bindingInstance);
     }
   } else {
-    throw new InvalidExpressionError(expression.toString());
+    throw InvalidExpressionError(expression.toString());
   }
 }
 
@@ -153,7 +151,7 @@ void _handleBindingArgs(
   // Element 0 is already processed by caller.
   for (var i = 1; i < args.length; ++i) {
     if (args[i] is! NamedExpression) {
-      throw new InvalidExpressionError('Invalid parameter ${args[i]} at $i');
+      throw InvalidExpressionError('Invalid parameter ${args[i]} at $i');
     }
 
     var namedExpression = args[i] as NamedExpression;
@@ -177,7 +175,7 @@ void _handleBindingArgs(
         _addReferencedClasses(expression, bindingInstance);
         break;
       default:
-        throw new UnsupportedError('Unimplemented named expression:'
+        throw UnsupportedError('Unimplemented named expression:'
             ' ${namedExpression.name.label.name}');
     }
   }

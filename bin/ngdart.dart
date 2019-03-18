@@ -11,7 +11,7 @@ import 'package:angular_cli/src/command_runner.dart';
 import 'package:args/command_runner.dart';
 
 Future main(List<String> args) async {
-  var runner = new NgDartCommanderRunner();
+  var runner = NgDartCommanderRunner();
 
   try {
     await runner.run(args);

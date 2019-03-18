@@ -22,7 +22,7 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
   final Map<String, ComponentInfo> _components;
 
   // Map to save variables that may be used in @Component.
-  final Map<String, Expression> _variables = new Map();
+  final Map<String, Expression> _variables = Map();
 
   AngularComponentVisitor(this._classes, this._components);
 
@@ -58,13 +58,13 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
         _components.putIfAbsent(component.classInfo.className, () => component);
       } else if (key == 'providers') {
         if (namedExpression.expression is ListLiteral) {
-          component.module = new ModuleInfo();
+          component.module = ModuleInfo();
           extractBindingInfo(namedExpression.expression, component.module);
         } else if (namedExpression.expression is Identifier) {
-          component.module = new ModuleInfo();
+          component.module = ModuleInfo();
           processBindingElement(namedExpression.expression, component.module);
         } else {
-          throw new InvalidExpressionError(annotation.toString());
+          throw InvalidExpressionError(annotation.toString());
         }
       } else if (key == 'directives') {
         _extractDirectives(namedExpression, annotation, component);
@@ -96,7 +96,7 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
         final templateTypeComponent = _getComponent(templateTypeComponentName);
         component.templateTypes.add(templateTypeComponent);
       } else {
-        throw new InvalidExpressionError(annotation.toString());
+        throw InvalidExpressionError(annotation.toString());
       }
     }
   }
@@ -104,9 +104,9 @@ class AngularComponentVisitor extends RecursiveAstVisitor {
   ComponentInfo _getComponent(String name) {
     if (!_components.containsKey(name)) {
       if (!_classes.containsKey(name)) {
-        _classes[name] = new DartClassInfo(name);
+        _classes[name] = DartClassInfo(name);
       }
-      _components[name] = new ComponentInfo(_classes[name]);
+      _components[name] = ComponentInfo(_classes[name]);
     }
 
     return _components[name];

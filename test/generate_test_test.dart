@@ -17,13 +17,13 @@ void main() {
   group('ngdart', () {
     AppLoggerMock logger;
     FileWriterMock writer;
-    FileReader.reader = new FileReaderMock();
+    FileReader.reader = FileReaderMock();
     NgDartCommanderRunner runner;
 
     setUp(() {
-      AppLogger.log = logger = new AppLoggerMock();
-      FileWriter.writer = writer = new FileWriterMock();
-      runner = new NgDartCommanderRunner();
+      AppLogger.log = logger = AppLoggerMock();
+      FileWriter.writer = writer = FileWriterMock();
+      runner = NgDartCommanderRunner();
     });
 
     test('should generate test with default path', () async {
@@ -101,7 +101,7 @@ var _pubSpec = ['name: hello_angular'];
 
 class FileReaderMock implements FileReader {
   @override
-  List<String> readAsLines(String filePath, {Encoding encoding: utf8}) {
+  List<String> readAsLines(String filePath, {Encoding encoding = utf8}) {
     if (filePath == '.packages') {
       return _dotPackages;
     } else if (filePath == 'pubspec.yaml') {
@@ -111,7 +111,7 @@ class FileReaderMock implements FileReader {
   }
 
   @override
-  String readAsString(String filePath, {Encoding encoding: utf8}) {
+  String readAsString(String filePath, {Encoding encoding = utf8}) {
     for (var file in _files) {
       if (file['path'] == filePath) return file['content'];
     }

@@ -25,10 +25,10 @@ class TemplateFile {
   /// Renders template file on [_path] with values from [_data].
   Future<String> renderString() async {
     var uri = fixUri('package:angular_cli/templates/$_path');
-    var resource = new Resource(uri);
+    var resource = Resource(uri);
     var content = await resource.readAsString(encoding: utf8);
 
-    var template = new Template(content);
+    var template = Template(content);
     return template.renderString(_data);
   }
 }
