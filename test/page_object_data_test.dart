@@ -33,7 +33,7 @@ void main() {
     test('should generate items in parents list', () {
       var po = new PageObjectData(
         '<p *ngFor="xxx"><action-button class="good">'
-            '</action-button></p>',
+        '</action-button></p>',
       );
       expect(po.variables.first.getterString,
           'Future<List<PageLoaderElement>> get good => _getGood();');
@@ -53,13 +53,13 @@ void main() {
     test('should sort generated items', () {
       var po1 = new PageObjectData(
         '<action-button class="good"></action-button>'
-            '<action-button class="bad"></action-button>',
+        '<action-button class="bad"></action-button>',
       );
       expect(po1.variables.first.name, 'Bad');
       expect(po1.variables.last.name, 'Good');
       var po2 = new PageObjectData(
         '<action-button class="good"></action-button>'
-            '<action-button class="bad"></action-button>',
+        '<action-button class="bad"></action-button>',
       );
       expect(po2.variables.first.name, 'Bad');
       expect(po2.variables.last.name, 'Good');
@@ -91,8 +91,8 @@ void main() {
     test('should choose correct selector.', () {
       var po = new PageObjectData(
         '<some-widget class="cool"></some-widget>'
-            '<some-widget class="cool" id="cooler"></some-widget>'
-            '<some-widget></some-widget>',
+        '<some-widget class="cool" id="cooler"></some-widget>'
+        '<some-widget></some-widget>',
       );
       expect(po.variables.length, 3);
       expect(po.variables[0].selector.toString(), "@ByClass('cool')");
@@ -103,7 +103,7 @@ void main() {
     test('should work with selectors with attributes', () {
       var po = new PageObjectData(
         '<some-cell class="field-class"></some-cell>'
-            '<some-cell id="fieldWithId"></some-cell>',
+        '<some-cell id="fieldWithId"></some-cell>',
       );
       expect(po.variables[0].selector.toString(), "@ByClass('field-class')");
       expect(po.variables[1].selector.toString(), "@ById('fieldWithId')");
