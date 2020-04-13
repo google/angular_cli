@@ -26,7 +26,7 @@ class PackageUriResolver {
     } catch (e) {
       throw new UsageException(
           'Error when reading $_dotPackagesFilePath, '
-          'please run pub get first.',
+              'please run pub get first.',
           '');
     }
 
@@ -49,7 +49,7 @@ class PackageUriResolver {
     if (_packageMap[packageName] == null) {
       throw new UsageException(
           'Cannot locate $packageName, '
-          'probably you need to run pub get again',
+              'probably you need to run pub get again',
           '');
     }
 

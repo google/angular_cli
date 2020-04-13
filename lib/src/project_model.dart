@@ -105,8 +105,8 @@ String _getProjectName(String pubspecFilePath) {
   } catch (e) {
     throw new UsageException(
         'Error happened when reading pubspec.yaml. '
-        'Command generate test should be run '
-        'under root directory of the project.',
+            'Command generate test should be run '
+            'under root directory of the project.',
         '');
   }
   var namePrefix = 'name:';
