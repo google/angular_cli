@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:angular_cli/src/visitors/angular_component_visitor.dart';
 import 'package:angular_cli/src/visitors/component_info.dart';
 import 'package:angular_cli/src/visitors/dart_class_info.dart';
@@ -14,7 +14,8 @@ void main() {
   group('AngularComponentVisitor', () {
     Map<String, ComponentInfo> visit(
         Map<String, DartClassInfo> classes, String content) {
-      var compilationUnit = parseCompilationUnit(content);
+      var parsed = parseString(content: content);
+      var compilationUnit = parsed.unit;
       var out = <String, ComponentInfo>{};
       var visitor = new AngularComponentVisitor(classes, out);
       compilationUnit.accept(visitor);

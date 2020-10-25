@@ -4,7 +4,9 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:angular_cli/src/visitors/binding_helper.dart';
 import 'package:angular_cli/src/visitors/binding_info.dart';
 import 'package:test/test.dart';
@@ -18,7 +20,7 @@ void main() {
     });
 
     parse(String contents) {
-      parseCompilationUnit(contents).accept(visitor);
+      parseString(content: contents).unit.accept(visitor);
     }
 
     test('should parse simple binding', () {
@@ -154,7 +156,7 @@ void main() {
     });
 
     parse(String contents) {
-      parseCompilationUnit(contents).accept(visitor);
+      parseString(content: contents).unit.accept(visitor);
     }
 
     void checkExpandedModule(
