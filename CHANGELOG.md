@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Upgrade dependencies
+
 ## 0.1.2
 
 - Added support for `generate directive`
