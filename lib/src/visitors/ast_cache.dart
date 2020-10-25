@@ -6,7 +6,8 @@
 
 import 'dart:collection';
 
-import 'package:analyzer/analyzer.dart';
+import 'package:analyzer/dart/analysis/utilities.dart';
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:path/path.dart' as path;
 
 import '../app_logger.dart';
@@ -70,14 +71,17 @@ class AstCache {
       var filePath = _uriResolver.resolve(uri);
       AppLogger.log.fine('Parsing file $filePath...');
 
-      compilationUnit = parseCompilationUnit(
-          FileReader.reader.readAsString(filePath),
-          name: filePath);
+      final parsed = parseString(
+        content: FileReader.reader.readAsString(filePath),
+        path: filePath,
+      );
+      compilationUnit = parsed.unit;
     } on UsageException {
       rethrow;
     } catch (e) {
       AppLogger.log.warning('Could not parse $uri: $e');
-      compilationUnit = parseCompilationUnit('');
+      final parsed = parseString(content: '');
+      compilationUnit = parsed.unit;
     }
 
     _uriToAst[uri] = compilationUnit;

@@ -6,11 +6,10 @@
 
 import 'dart:async';
 import "dart:convert" show utf8;
+import 'dart:io';
+import 'dart:isolate';
 
 import 'package:mustache/mustache.dart';
-import 'package:resource/resource.dart' show Resource;
-
-import 'path_util.dart';
 
 /// Template file class wrapping operations on mustache template.
 class TemplateFile {
@@ -24,8 +23,10 @@ class TemplateFile {
 
   /// Renders template file on [_path] with values from [_data].
   Future<String> renderString() async {
-    var uri = fixUri('package:angular_cli/templates/$_path');
-    var resource = new Resource(uri);
+    var uri = await Isolate.resolvePackageUri(
+      Uri.parse('package:angular_cli/templates/$_path'),
+    );
+    var resource = File.fromUri(uri);
     var content = await resource.readAsString(encoding: utf8);
 
     var template = new Template(content);

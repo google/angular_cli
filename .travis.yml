@@ -1,6 +1,6 @@
 language: dart
 dart:
-- dev
+- stable
 script:
-- dartanalyzer --fatal-warnings --fatal-lints .
-- pub run test
+- dart analyze --fatal-warnings --fatal-infos .
+- dart pub run test
